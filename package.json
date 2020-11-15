@@ -7,7 +7,6 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "nodemon --exec babel-node src/server.js"
     },
-
     "keywords": [
         "chatbot",
         "doan"
@@ -22,7 +21,8 @@
         "dotenv": "^8.2.0",
         "ejs": "^3.1.5",
         "express": "^4.17.1",
-        "nodemon": "^2.0.6"
+        "nodemon": "^2.0.6",
+        "request": "^2.88.2"
     },
     "devDependencies": {
         "@babel/preset-env": "^7.12.1"
