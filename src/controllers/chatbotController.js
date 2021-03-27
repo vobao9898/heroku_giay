@@ -75,7 +75,6 @@ function handleMessage(sender_psid, received_message) {
             text: `You sent the message: "${received_message.text}". Now send me an attachment!`,
         };
     } else if (received_message.attachments) {
-        console.log('ss');
         // Get the URL of the message attachment
         let attachment_url = received_message.attachments[0].payload.url;
         response = {
@@ -130,7 +129,30 @@ function callSendAPI(sender_psid, response) {
         recipient: {
             id: sender_psid,
         },
-        message: response,
+        message: {
+            attachment: {
+                type: 'template',
+                payload: {
+                    template_type: 'generic',
+                    elements: [{
+                        title: 'Is this the right picture?',
+                        subtitle: 'Tap a button to answer.',
+                        image_url: 'https://www.google.com/search?q=hinh+anh+png&sxsrf=ALeKk015qyL8P6_chpCw4tfnznp8AbVZOw:1616832265950&tbm=isch&source=iu&ictx=1&fir=2ueLoIjGFmTO5M%252CepQmq_iyw6tmJM%252C_&vet=1&usg=AI4_-kTTWcxMYqWjgHIqCsgaVqzGuBP4yQ&sa=X&ved=2ahUKEwjd9f3GgdDvAhWeyIsBHcJsCzYQ9QF6BAgNEAE#imgrc=2ueLoIjGFmTO5M',
+                        buttons: [{
+                                type: 'postback',
+                                title: 'Yes!',
+                                payload: 'yes',
+                            },
+                            {
+                                type: 'postback',
+                                title: 'No!',
+                                payload: 'no',
+                            },
+                        ],
+                    }, ],
+                },
+            },
+        },
     };
 
     // Send the HTTP request to the Messenger Platform
