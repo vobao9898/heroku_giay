@@ -1,4 +1,4 @@
-require("dotenv").config();
+require('dotenv').config();
 import request from 'request';
 
 const MY_VERIFY_FB_TOKEN = process.env.MY_VERIFY_FB_TOKEN;
@@ -26,7 +26,6 @@ let postWebhook = (req, res) => {
                     if (message.quick_reply) {
                         handleQuickReply(sender_psid, message);
                     } else if (message.text) {
-
                         handleMessage(sender_psid, message);
                     }
                 } else if (webhook_event.postback) {
@@ -68,43 +67,41 @@ let getWebhook = (req, res) => {
     }
 };
 
-
 function handleMessage(sender_psid, received_message) {
     let response;
     console.log('ss');
     // Checks if the message contains text
-    if (received_message.text == 'hi') {
-        console.log('sss');
+    if (received_message.text) {
         response = {
-            "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
-        }
+            text: `You sent the message: "${received_message.text}". Now send me an attachment!`,
+        };
     } else if (received_message.attachments) {
         // Get the URL of the message attachment
         let attachment_url = received_message.attachments[0].payload.url;
         response = {
-            "attachment": {
-                "type": "template",
-                "payload": {
-                    "template_type": "generic",
-                    "elements": [{
-                        "title": "Is this the right picture?",
-                        "subtitle": "Tap a button to answer.",
-                        "image_url": attachment_url,
-                        "buttons": [{
-                                "type": "postback",
-                                "title": "Yes!",
-                                "payload": "yes",
+            attachment: {
+                type: 'template',
+                payload: {
+                    template_type: 'generic',
+                    elements: [{
+                        title: 'Is this the right picture?',
+                        subtitle: 'Tap a button to answer.',
+                        image_url: attachment_url,
+                        buttons: [{
+                                type: 'postback',
+                                title: 'Yes!',
+                                payload: 'yes',
                             },
                             {
-                                "type": "postback",
-                                "title": "No!",
-                                "payload": "no",
-                            }
+                                type: 'postback',
+                                title: 'No!',
+                                payload: 'no',
+                            },
                         ],
-                    }]
-                }
-            }
-        }
+                    }, ],
+                },
+            },
+        };
     }
 
     // Send the response message
@@ -119,9 +116,9 @@ function handlePostback(sender_psid, received_postback) {
 
     // Set the response based on the postback payload
     if (payload === 'yes') {
-        response = { "text": "Thanks!" }
+        response = { text: 'Thanks!' };
     } else if (payload === 'no') {
-        response = { "text": "Oops, try sending another image." }
+        response = { text: 'Oops, try sending another image.' };
     }
     // Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
@@ -139,7 +136,9 @@ function callSendAPI(sender_psid, response) {
     // Send the HTTP request to the Messenger Platform
     request({
             uri: 'https://graph.facebook.com/v10.0/me/messages',
-            qs: { access_token: "EAANNAcgakRcBALhK8oTDPnXKUIaed4dk99C2E8fZBCZCJ4e2zFWavhIXjiZBLZA5toAuUALJDsFgJaS6EjlQeLVJofNylmMIpoLjabOpQYsaDwTci0bh6mPQLgaZBZCin7T3FuEApOBwTplDqrYZCE5HF8cQq8Xt3yv87o7uIRHgAZDZD" },
+            qs: {
+                access_token: 'EAANNAcgakRcBALhK8oTDPnXKUIaed4dk99C2E8fZBCZCJ4e2zFWavhIXjiZBLZA5toAuUALJDsFgJaS6EjlQeLVJofNylmMIpoLjabOpQYsaDwTci0bh6mPQLgaZBZCin7T3FuEApOBwTplDqrYZCE5HF8cQq8Xt3yv87o7uIRHgAZDZD',
+            },
             method: 'POST',
             json: request_body,
         },
@@ -152,7 +151,6 @@ function callSendAPI(sender_psid, response) {
         }
     );
 }
-
 
 module.exports = {
     postWebhook: postWebhook,
