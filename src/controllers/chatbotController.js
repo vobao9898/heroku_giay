@@ -1,30 +1,38 @@
-require('dotenv').config();
+require("dotenv").config();
 import request from 'request';
 
 const MY_VERIFY_FB_TOKEN = process.env.MY_VERIFY_FB_TOKEN;
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
 let postWebhook = (req, res) => {
+    // Parse the request body from the POST
     let body = req.body;
 
     // Check the webhook event is from a Page subscription
     if (body.object === 'page') {
         // Iterate over each entry - there may be multiple if batched
         body.entry.forEach(function(entry) {
-            // Gets the body of the webhook event
+            // // Gets the body of the webhook event
             let webhook_event = entry.messaging[0];
-            console.log(webhook_event);
+            // console.log(webhook_event);
 
-            // Get the sender PSID
+            // // Get the sender PSID
             let sender_psid = webhook_event.sender.id;
-            console.log('Sender PSID: ' + sender_psid);
+            // console.log('Sender PSID: ' + sender_psid);
 
-            // Check if the event is a message or postback and
-            // pass the event to the appropriate handler function
-            if (webhook_event.message) {
-                handleMessage(sender_psid, webhook_event.message);
-            } else if (webhook_event.postback) {
-                handlePostback(sender_psid, webhook_event.postback);
+            try {
+                if (webhook_event.message) {
+                    let message = webhook_event.message;
+                    if (message.quick_reply) {
+                        handleQuickReply(sender_psid, message);
+                    } else if (message.text) {
+                        handleTextMessage(sender_psid, message);
+                    }
+                } else if (webhook_event.postback) {
+                    handlePostback(sender_psid, webhook_event.postback);
+                }
+            } catch (error) {
+                console.error(error);
             }
         });
 
@@ -37,7 +45,8 @@ let postWebhook = (req, res) => {
 };
 
 let getWebhook = (req, res) => {
-    let w = 'doantotnghiep';
+    // Your verify token. Should be a random string.
+    let VERIFY_TOKEN = process.env.MY_VERIFY_FB_TOKEN;
 
     // Parse the query params
     let mode = req.query['hub.mode'];
@@ -74,33 +83,33 @@ function handleMessage(sender_psid, received_message) {
     callSendAPI(sender_psid, response);
 }
 
-// Handles messaging_postbacks events
-function handlePostback(sender_psid, received_postback) {
-    let response;
 
-    // Get the payload for the postback
-    let payload = received_postback.payload;
-
-    // Set the response based on the postback payload
-    if (payload === 'yes') {
-        response = { text: 'Thanks!' };
-    } else if (payload === 'no') {
-        response = { text: 'Oops, try sending another image.' };
-    }
-    // Send the message to acknowledge the postback
-    callSendAPI(sender_psid, response);
-}
-
-// Sends response messages via the Send API
 function callSendAPI(sender_psid, response) {
+    // Construct the message body
     let request_body = {
-        "recipient": {
-            "id": sender_psid
+        recipient: {
+            id: sender_psid,
         },
-        "message": response
-    }
+        message: { text: response },
+    };
 
+    // Send the HTTP request to the Messenger Platform
+    request({
+            uri: 'https://graph.facebook.com/v10.0/me/messages',
+            qs: { access_token: process.env.FB_PAGE_TOKEN },
+            method: 'POST',
+            json: request_body,
+        },
+        (err, res, body) => {
+            if (!err) {
+                console.log('message sent!');
+            } else {
+                console.error('Unable to send message:' + err);
+            }
+        }
+    );
 }
+
 
 module.exports = {
     postWebhook: postWebhook,
