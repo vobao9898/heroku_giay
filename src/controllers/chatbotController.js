@@ -1,4 +1,4 @@
-require('dotenv').config.env;
+require('dotenv').config();
 import request from 'request';
 
 const MY_VERIFY_FB_TOKEN = process.env.MY_VERIFY_FB_TOKEN;
