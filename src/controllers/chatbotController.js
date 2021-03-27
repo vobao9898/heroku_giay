@@ -37,7 +37,7 @@ let postWebhook = (req, res) => {
 };
 
 let getWebhook = (req, res) => {
-    let VERIFY_TOKEN = 'doantotnghiep';
+    let w = 'doantotnghiep';
 
     // Parse the query params
     let mode = req.query['hub.mode'];
@@ -60,44 +60,17 @@ let getWebhook = (req, res) => {
 
 function handleMessage(sender_psid, received_message) {
     let response;
-    console.log(received_message.text);
-    // Checks if the message contains text
+
+    // Check if the message contains text
     if (received_message.text) {
-        // Create the payload for a basic text message, which
-        // will be added to the body of our request to the Send API
+
+        // Create the payload for a basic text message
         response = {
-            text: `You sent the message: "${received_message.text}". Now send me an attachment!`,
-        };
-    } else if (received_message.attachments) {
-        // Get the URL of the message attachment
-        let attachment_url = received_message.attachments[0].payload.url;
-        response = {
-            attachment: {
-                type: 'template',
-                payload: {
-                    template_type: 'generic',
-                    elements: [{
-                        title: 'Is this the right picture?',
-                        subtitle: 'Tap a button to answer.',
-                        image_url: attachment_url,
-                        buttons: [{
-                                type: 'postback',
-                                title: 'Yes!',
-                                payload: 'yes',
-                            },
-                            {
-                                type: 'postback',
-                                title: 'No!',
-                                payload: 'no',
-                            },
-                        ],
-                    }, ],
-                },
-            },
-        };
+            "text": `You sent the message: "${received_message.text}". Now send me an image!`
+        }
     }
 
-    // Send the response message
+    // Sends the response message
     callSendAPI(sender_psid, response);
 }
 
@@ -120,29 +93,13 @@ function handlePostback(sender_psid, received_postback) {
 
 // Sends response messages via the Send API
 function callSendAPI(sender_psid, response) {
-    // Construct the message body
     let request_body = {
-        recipient: {
-            id: sender_psid,
+        "recipient": {
+            "id": sender_psid
         },
-        message: response,
-    };
+        "message": response
+    }
 
-    // Send the HTTP request to the Messenger Platform
-    request({
-            uri: 'https://graph.facebook.com/v10.0/me/messages',
-            qs: { access_token: EAANNAcgakRcBAIgiTwEbFj4RcKexEGODBRoMZA6LEzJXPIzoUZADcbuXeJpWrpRHQjt6XBmecK6kqrezZClMZAwgMe9wBOZAynDkaI9jlovAheJtjmTFYrBmw350FyocZAZBnwXaSV8EBa6D4ymWUAEfnEO94ieeFbiYDdAvk0TCgZDZD },
-            method: 'POST',
-            json: request_body,
-        },
-        (err, res, body) => {
-            if (!err) {
-                console.log('message sent!');
-            } else {
-                console.error('Unable to send message:' + err);
-            }
-        }
-    );
 }
 
 module.exports = {
