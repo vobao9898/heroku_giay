@@ -26,7 +26,7 @@ let postWebhook = (req, res) => {
                     if (message.quick_reply) {
                         handleQuickReply(sender_psid, message);
                     } else if (message.text) {
-                        console.log('s');
+
                         handleMessage(sender_psid, message);
                     }
                 } else if (webhook_event.postback) {
@@ -71,11 +71,10 @@ let getWebhook = (req, res) => {
 
 function handleMessage(sender_psid, received_message) {
     let response;
-
+    console.log('ss');
     // Checks if the message contains text
-    if (received_message.text) {
-        // Create the payload for a basic text message, which
-        // will be added to the body of our request to the Send API
+    if (received_message.text == 'hi') {
+        console.log('sss');
         response = {
             "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
         }
