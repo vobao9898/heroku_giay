@@ -69,13 +69,12 @@ let getWebhook = (req, res) => {
 
 function handleMessage(sender_psid, received_message) {
     let response;
-    console.log('ss');
     // Checks if the message contains text
     if (received_message.text) {
         response = {
             text: `You sent the message: "${received_message.text}". Now send me an attachment!`,
         };
-    } else if (received_message.attachments) {
+    } else {
         // Get the URL of the message attachment
         let attachment_url = received_message.attachments[0].payload.url;
         response = {
