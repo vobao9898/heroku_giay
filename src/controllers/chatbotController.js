@@ -26,6 +26,7 @@ let postWebhook = (req, res) => {
                     if (message.quick_reply) {
                         handleQuickReply(sender_psid, message);
                     } else if (message.text) {
+                        console.log('s');
                         handleMessage(sender_psid, message);
                     }
                 } else if (webhook_event.postback) {
