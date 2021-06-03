@@ -17,14 +17,37 @@
         "@babel/cli": "^7.12.1",
         "@babel/core": "^7.12.3",
         "@babel/node": "^7.12.6",
+        "bcrypt": "^5.0.1",
         "body-parser": "^1.19.0",
+        "config": "^3.3.6",
+        "cookie-parser": "^1.4.5",
+        "cookie-session": "^1.4.0",
+        "cors": "^2.8.5",
         "dotenv": "^8.2.0",
         "ejs": "^3.1.5",
         "express": "^4.17.1",
+        "express-jwt": "^6.0.0",
+        "express-mysql-session": "^2.1.5",
+        "express-validator": "^6.10.0",
+        "fs": "0.0.1-security",
+        "joi": "^17.4.0",
+        "jsonwebtoken": "^8.5.1",
+        "morgan": "^1.10.0",
+        "multer": "^1.4.2",
+        "mysql": "^2.18.1",
+        "mysql2": "^2.2.5",
         "nodemon": "^2.0.6",
-        "request": "^2.88.2"
+        "passport": "^0.4.1",
+        "path": "^0.12.7",
+        "request": "^2.88.2",
+        "sequelize": "^6.6.2",
+        "sequelize-cli": "^6.2.0",
+        "session": "^0.1.0",
+        "sharp": "^0.28.1",
+        "util": "^0.12.3",
+        "uuidv4": "^6.2.7"
     },
     "devDependencies": {
-        "@babel/preset-env": "^7.13.12"
+        "@babel/preset-env": "^7.12.1"
     }
 }
