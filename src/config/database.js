@@ -1,11 +1,10 @@
 const { createPool } = require('mysql');
 
 const pool = createPool({
-    host: 'localhost',
-    port: 3306,
-    user: 'root',
-    password: '',
-    database: 'do-an-tot-nghiep',
+    host: 'us-cdbr-east-04.cleardb.com',
+    user: 'bf0844fbd86225',
+    password: '71b99177238a174',
+    database: 'heroku_b938c71e4878655',
     connectionLimit: 10,
 });
 

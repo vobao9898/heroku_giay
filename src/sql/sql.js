@@ -1,18 +1,16 @@
 const mysql = require('mysql');
 
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'do-an-tot-nghiep',
-});
-connection.connect(function(err) {
-    err ? console.log('s') : console.log('ss');
+const con = mysql.createPool({
+    connectionLimit: 10,
+    host: 'us-cdbr-east-04.cleardb.com',
+    user: 'bf0844fbd86225',
+    password: '71b99177238a174',
+    database: 'heroku_b938c71e4878655',
 });
 
 let danhsachLogin = (req, res) => {
     var sql = 'SELECT * FROM nhan_vien';
-    connection.query(sql, function(err, results) {
+    con.query(sql, function(err, results) {
         if (err) throw err;
         else {
             // nhommonan = JSON.stringify({ monan: results });
