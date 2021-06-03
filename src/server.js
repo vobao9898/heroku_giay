@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 global.__basedir = __dirname;
 const corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: 'https://utc9898.000webhostapp.com',
     credentials: true, //access-control-allow-credentials:true
     optionSuccessStatus: 200,
 };
