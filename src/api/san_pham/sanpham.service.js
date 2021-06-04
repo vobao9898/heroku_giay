@@ -42,15 +42,12 @@ module.exports = {
                 }
             );
         } else {
-            pool.query(
-                `select * from giay WHERE limit ? offset ?`, [data.limit, data.offset],
-                (error, results, fields) => {
-                    if (error) {
-                        callBack(error);
-                    }
-                    return callBack(null, results[0]);
+            pool.query(`select * from giay limit ? offset ?`, [data.limit, data.offset], (error, results, fields) => {
+                if (error) {
+                    callBack(error);
                 }
-            );
+                return callBack(null, results[0]);
+            });
         }
     },
     getGiay: (callBack) => {
