@@ -41,6 +41,7 @@ module.exports = {
     },
     page: (callBack) => {
         pool.query(`select * from nhan_vien limit ? offset ?`, [2, 2], (error, results, fields) => {
+           'select * from giay WHERE id_loai_giay = 43 limit 4 offset 0'
             if (error) {
                 callBack(error);
             }

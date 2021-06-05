@@ -31,24 +31,15 @@ module.exports = {
         });
     },
     page: (data, callBack) => {
-        if (data.id_loai_giay != 0) {
-            pool.query(
-                `select * from giay WHERE id_loai_giay = ? limit ? offset ?`, [data.id_loai_giay, data.limit, data.offset],
-                (error, results, fields) => {
-                    if (error) {
-                        callBack(error);
-                    }
-                    return callBack(null, results[0]);
-                }
-            );
-        } else {
-            pool.query(`select * from giay limit ? offset ?`, [data.limit, data.offset], (error, results, fields) => {
+        pool.query(
+            `select * from giay WHERE id_loai_giay = ? limit ? offset ?`, [data.id_loai_giay, data.limit, data.offset],
+            (error, results, fields) => {
                 if (error) {
                     callBack(error);
                 }
-                return callBack(null, results[0]);
-            });
-        }
+                return callBack(null, results);
+            }
+        );
     },
     getGiay: (callBack) => {
         pool.query(`select * from giay`, [], (error, results, fields) => {
@@ -58,14 +49,7 @@ module.exports = {
             return callBack(null, results);
         });
     },
-    page: (callBack) => {
-        pool.query(`select * from nhan_vien limit ? offset ?`, [2, 2], (error, results, fields) => {
-            if (error) {
-                callBack(error);
-            }
-            return callBack(null, results);
-        });
-    },
+
     updateGiay: (data, callBack) => {
         pool.query(
             `update giay set ten_giay=?, mo_ta=?,id_loai_giay=?, date_update=?, gia_ban=?, trang_thai=?  where id = ?`, [data.ten_giay, data.mo_ta, data.id_loai_giay, data.date_update, data.gia_ban, data.trang_thai, data.id_g],

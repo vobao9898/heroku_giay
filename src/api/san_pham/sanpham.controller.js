@@ -28,7 +28,8 @@ module.exports = {
         });
     },
     page: (req, res) => {
-        giay.page((err, results) => {
+        const body = req.body;
+        giay.page(body, (err, results) => {
             if (err) {
                 console.log(err);
                 return;
@@ -53,7 +54,6 @@ module.exports = {
                     message: 'Record not Found',
                 });
             }
-
             return res.json({
                 success: 1,
                 data: results,
