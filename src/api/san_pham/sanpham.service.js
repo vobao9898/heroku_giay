@@ -31,15 +31,26 @@ module.exports = {
         });
     },
     page: (data, callBack) => {
-        pool.query(
-            `select * from giay WHERE id_loai_giay = ? limit ? offset ?`, [data.id_loai_giay, data.limit, data.offset],
-            (error, results, fields) => {
+        if (data.id_loai_giay !== 0) {
+            pool.query(
+                `select * from giay WHERE id_loai_giay = ? limit ? offset ?`, [data.id_loai_giay, data.limit, data.offset],
+                (error, results, fields) => {
+                    if (error) {
+                        callBack(error);
+                    }
+                    console.log(results[0]);
+                    return callBack(null, results[0]);
+                }
+            );
+        } else {
+            pool.query(`select * from giay limit ? offset ?`, [data.limit, data.offset], (error, results, fields) => {
                 if (error) {
                     callBack(error);
                 }
-                return callBack(null, results);
-            }
-        );
+                console.log(results[0]);
+                return callBack(null, results[0]);
+            });
+        }
     },
     getGiay: (callBack) => {
         pool.query(`select * from giay`, [], (error, results, fields) => {
