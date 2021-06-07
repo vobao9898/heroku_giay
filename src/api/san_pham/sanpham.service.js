@@ -53,6 +53,7 @@ module.exports = {
         }
     },
     pageSearch: (data, callBack) => {
+        console.log(data);
         if (data.ten_giay !== '') {
             pool.query(
                 `select * from giay WHERE ten_giay like '%?%' limit ? offset ?`, [data.ten_giay, data.limit, data.offset],
