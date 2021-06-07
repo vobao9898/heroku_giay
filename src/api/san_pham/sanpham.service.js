@@ -56,7 +56,7 @@ module.exports = {
         console.log(data);
         if (data.ten_giay !== '') {
             pool.query(
-                `select * from giay WHERE ten_giay like %${data.ten_giay}% limit ? offset ?`, [data.limit, data.offset],
+                `select * from giay WHERE ten_giay like '%${data.ten_giay}%' limit ? offset ?`, [data.limit, data.offset],
                 (error, results, fields) => {
                     if (error) {
                         callBack(error);
