@@ -2,7 +2,6 @@ const router = require('express').Router();
 const { checkToken } = require('../../auth/token_validation');
 import * as giay from './sanpham.controller';
 router.get('/', checkToken, giay.getGiay);
-// router.get('/page', checkToken, giay.page);
 router.post('/', checkToken, giay.createGiay);
 router.post('/page', checkToken, giay.page);
 router.get('/:id', checkToken, giay.getUserByUserId);
