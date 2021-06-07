@@ -40,6 +40,19 @@ module.exports = {
             });
         });
     },
+    pageSearch: (req, res) => {
+        const body = req.body;
+        giay.pageSearch(body, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            return res.json({
+                success: 1,
+                data: results,
+            });
+        });
+    },
 
     getUserByUserId: (req, res) => {
         const id = req.params.id;
@@ -94,9 +107,6 @@ module.exports = {
     },
     updateGiay: (req, res) => {
         const body = req.body;
-        // const salt = genSaltSync(10);
-        // body.password = hashSync(body.password, salt);
-        console.log(body.username);
         giay.updateGiay(body, (err, results) => {
             if (err) {
                 console.log(err);

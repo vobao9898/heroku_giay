@@ -52,6 +52,28 @@ module.exports = {
             });
         }
     },
+    pageSearch: (data, callBack) => {
+        if (data.ten_giay !== 0) {
+            pool.query(
+                `select * from giay WHERE id_loai_giay = ? and ten_giay like '%?%' limit ? offset ?`, [data.id_loai_giay, data.ten_giay, data.limit, data.offset],
+                (error, results, fields) => {
+                    if (error) {
+                        callBack(error);
+                    }
+
+                    return callBack(null, results);
+                }
+            );
+        } else {
+            pool.query(`select * from giay limit ? offset ?`, [data.limit, data.offset], (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
+
+                return callBack(null, results);
+            });
+        }
+    },
     getGiay: (callBack) => {
         pool.query(`select * from giay`, [], (error, results, fields) => {
             if (error) {
