@@ -95,6 +95,17 @@ module.exports = {
             }
         );
     },
+    newProducts: (callBack) => {
+        pool.query(
+            `select * from giay as g, chi_tiet_mau_sac as m, chi_tiet_mau_sac_size as s WHERE g.id = m.id_giay and m.id = s.id_ct_mau_sac and g.id IN (SELECT sub.id from (select id from giay ORDER BY date_create DESC LIMIT 9)AS sub)`, [],
+            (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
 
     updateGiay: (data, callBack) => {
         pool.query(

@@ -117,6 +117,18 @@ module.exports = {
             });
         });
     },
+    newProducts: (req, res) => {
+        giay.newProducts((err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            return res.json({
+                success: 1,
+                data: results,
+            });
+        });
+    },
     updateGiay: (req, res) => {
         const body = req.body;
         giay.updateGiay(body, (err, results) => {
