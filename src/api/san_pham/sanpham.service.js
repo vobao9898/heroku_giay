@@ -85,15 +85,12 @@ module.exports = {
         });
     },
     newProduct: (callBack) => {
-        pool.query(
-            `SELECT sub.id from (select id from giay ORDER BY date_create DESC LIMIT 9)AS sub`, [],
-            (error, results, fields) => {
-                if (error) {
-                    callBack(error);
-                }
-                return callBack(null, results);
+        pool.query(`select * from giay ORDER BY date_create DESC`, [], (error, results, fields) => {
+            if (error) {
+                callBack(error);
             }
-        );
+            return callBack(null, results);
+        });
     },
     newProducts: (callBack) => {
         pool.query(
