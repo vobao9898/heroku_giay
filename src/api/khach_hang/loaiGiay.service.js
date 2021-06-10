@@ -3,16 +3,14 @@ const pool = require('../../config/database');
 module.exports = {
     create: (data, callBack) => {
         pool.query(
-            `insert into khach_hang(messenger_id, email, username, password, phone, avatar, ten_khach_hang, ngay_sinh, gioi_tinh) values (?,?,?,?,?,?,?,?,?)`, [
+            `insert into khach_hang(messenger_id, email, ho_khach_hang, password, phone, avatar, ten_khach_hang) values (?,?,?,?,?,?,?)`, [
                 data.messenger_id,
                 data.email,
-                data.username,
+                data.ho_khach_hang,
                 data.password,
                 data.phone,
                 data.avatar,
                 data.ten_khach_hang,
-                data.ngay_sinh,
-                data.gioi_tinh,
             ],
             (error, results, fields) => {
                 if (error) {
