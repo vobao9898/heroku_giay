@@ -129,7 +129,7 @@ module.exports = {
     },
 
     giayLG: (data, callBack) => {
-        pool.query(`SELECT * from giay WHERE id_loai_giay = 43`, [data.id_loai_giay], (error, results, fields) => {
+        pool.query(`SELECT * from giay WHERE id_loai_giay = ?`, [data.id_loai_giay], (error, results, fields) => {
             if (error) {
                 callBack(error);
             }
