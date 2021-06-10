@@ -116,6 +116,27 @@ module.exports = {
         );
     },
 
+    productLG: (data, callBack) => {
+        pool.query(
+            `select g.id, g.ten_giay, g.gia_ban, g.id_loai_giay, g.mo_ta, g.gia_ban_khuyen_mai, m.id, m.id_mau_sac, ms.ten_mau_sac, m.hinh_anh, s.id_size, si.ten_size, s.so_luong, l.ten_loai_giay from giay as g, chi_tiet_mau_sac as m, chi_tiet_mau_sac_size as s, mau_sac as ms, size as si, loai_giay as l WHERE g.id = m.id_giay  and m.id_mau_sac = ms.id and  m.id = s.id_ct_mau_sac and si.id = s.id_size and g.trang_thai != 0 and l.id = g.id_loai_giay and l.id = ?`, [data.id_loai_giay],
+            (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+
+    giayLG: (data, callBack) => {
+        pool.query(`SELECT * from giay WHERE id_loai_giay = 43`, [data.id_loai_giay], (error, results, fields) => {
+            if (error) {
+                callBack(error);
+            }
+            return callBack(null, results);
+        });
+    },
+
     updateGiay: (data, callBack) => {
         pool.query(
             `update giay set ten_giay=?, mo_ta=?,id_loai_giay=?, date_update=?, gia_ban=?, trang_thai=?  where id = ?`, [data.ten_giay, data.mo_ta, data.id_loai_giay, data.date_update, data.gia_ban, data.trang_thai, data.id_g],
