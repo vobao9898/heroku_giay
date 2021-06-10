@@ -31,12 +31,15 @@ module.exports = {
         });
     },
     getAll: (callBack) => {
-        pool.query(`select * from chi_tiet_mau_sac`, [], (error, results, fields) => {
-            if (error) {
-                callBack(error);
+        pool.query(
+            `select * from chi_tiet_mau_sac as c, mau_sac as m where c.id_mau_sac = m.id`, [],
+            (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
+                return callBack(null, results);
             }
-            return callBack(null, results);
-        });
+        );
     },
     page: (callBack) => {
         pool.query(`select * from chi_tiet_mau_sac limit ? offset ?`, [0, 2], (error, results, fields) => {
