@@ -32,7 +32,7 @@ module.exports = {
     },
     getAll: (callBack) => {
         pool.query(
-            `select * from chi_tiet_mau_sac as c, mau_sac as m where c.id_mau_sac = m.id`, [],
+            `select c.id, c.hinh_anh, c.id_giay, c.id_mau_sac, m.ten_mau_sac from chi_tiet_mau_sac as c, mau_sac as m where c.id_mau_sac = m.id`, [],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
