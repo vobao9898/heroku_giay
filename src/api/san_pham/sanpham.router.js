@@ -1,17 +1,17 @@
 const router = require('express').Router();
 const { checkToken } = require('../../auth/token_validation');
 import * as giay from './sanpham.controller';
-router.get('/', checkToken, giay.getGiay);
+router.get('/', giay.getGiay);
 router.get('/newProducts', giay.newProducts);
 router.post('/productLG', giay.productLG);
 router.post('/giayLG', giay.giayLG);
 router.get('/newProduct', giay.newProduct);
-router.post('/', checkToken, giay.createGiay);
-router.post('/page', checkToken, giay.page);
-router.post('/pageSearch', checkToken, giay.pageSearch);
-router.get('/:id', checkToken, giay.getUserByUserId);
-router.post('/ten_giay', checkToken, giay.getUserByGiay);
-router.patch('/', checkToken, giay.updateGiay);
-router.post('/delete', checkToken, giay.deleteGiay);
+router.post('/', giay.createGiay);
+router.post('/page', giay.page);
+router.post('/pageSearch', giay.pageSearch);
+router.get('/:id', giay.getUserByUserId);
+router.post('/ten_giay', giay.getUserByGiay);
+router.patch('/', giay.updateGiay);
+router.post('/delete', giay.deleteGiay);
 
 module.exports = router;
