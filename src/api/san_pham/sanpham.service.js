@@ -111,7 +111,19 @@ module.exports = {
                 if (error) {
                     callBack(error);
                 }
-                console.log(results);
+
+                return callBack(null, results);
+            }
+        );
+    },
+    newProductsAllPage: (data, callBack) => {
+        pool.query(
+            `select * from giay ORDER BY ten_giay DESC LIMIT 12 OFFSET 0`, [data.sortBy, data.groupBy, data.limit, data.offset],
+            (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
+
                 return callBack(null, results);
             }
         );

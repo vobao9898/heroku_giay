@@ -161,10 +161,25 @@ module.exports = {
             });
         });
     },
+
     newProductsAll: (req, res) => {
         const body = req.body;
 
         giay.newProductsAll(body, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            return res.json({
+                success: 1,
+                data: results,
+            });
+        });
+    },
+    newProductsAllPage: (req, res) => {
+        const body = req.body;
+
+        giay.newProductsAllPage(body, (err, results) => {
             if (err) {
                 console.log(err);
                 return;
