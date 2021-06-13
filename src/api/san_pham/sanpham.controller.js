@@ -162,7 +162,9 @@ module.exports = {
         });
     },
     newProductsAll: (req, res) => {
-        giay.newProductsAll((err, results) => {
+        const body = req.body;
+
+        giay.newProductsAll(body, (err, results) => {
             if (err) {
                 console.log(err);
                 return;
