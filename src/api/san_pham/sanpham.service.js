@@ -131,7 +131,7 @@ module.exports = {
 
     productLG: (data, callBack) => {
         pool.query(
-            `select g.id, g.ten_giay, g.gia_ban, g.id_loai_giay, g.mo_ta, g.gia_ban_khuyen_mai, m.id, m.id_mau_sac, ms.ten_mau_sac, m.hinh_anh, s.id_size, si.ten_size, s.so_luong, l.ten_loai_giay from giay as g, chi_tiet_mau_sac as m, chi_tiet_mau_sac_size as s, mau_sac as ms, size as si, loai_giay as l WHERE g.id = m.id_giay  and m.id_mau_sac = ms.id and  m.id = s.id_ct_mau_sac and si.id = s.id_size and g.trang_thai != 0 and l.id = g.id_loai_giay and l.id = ?`, [data.id_loai_giay],
+            `select g.id as id_giay, g.ten_giay, g.gia_ban, g.id_loai_giay, g.mo_ta, g.gia_ban_khuyen_mai, m.id, m.id_mau_sac, ms.ten_mau_sac, m.hinh_anh, s.id_size, si.ten_size, s.so_luong from giay as g, chi_tiet_mau_sac as m, chi_tiet_mau_sac_size as s, mau_sac as ms, size as si WHERE g.id = m.id_giay  and m.id_mau_sac = ms.id and  m.id = s.id_ct_mau_sac and si.id = s.id_size and g.trang_thai != 0 and g.id IN (SELECT sub.id from (select id from giay )AS sub)`, [],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
