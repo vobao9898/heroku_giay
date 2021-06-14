@@ -29,7 +29,7 @@ module.exports = {
     },
     productLG: (req, res) => {
         const body = req.body;
-        giay.productLG(body, (err, results) => {
+        giay.productLG((err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
