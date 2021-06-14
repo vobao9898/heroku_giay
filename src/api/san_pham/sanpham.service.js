@@ -118,7 +118,7 @@ module.exports = {
     },
     newProductsAllPage: (data, callBack) => {
         pool.query(
-            `select * from giay where id_loai_giay ORDER BY ${data.sortBy} ${data.groupBy} LIMIT ? OFFSET ?`, [data.id_loai_giay, data.limit, data.offset],
+            `select * from giay where id_loai_giay = ? ORDER BY ${data.sortBy} ${data.groupBy} LIMIT ? OFFSET ?`, [data.id_loai_giay, data.limit, data.offset],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
