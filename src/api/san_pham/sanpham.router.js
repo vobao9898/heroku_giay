@@ -6,6 +6,8 @@ router.get('/newProducts', giay.newProducts);
 
 router.post('/newProductsAllPage', giay.newProductsAllPage);
 router.post('/newProductsAll', giay.newProductsAll);
+router.post('/sanPhamMoi', giay.sanPhamMoi);
+router.post('/sanPhamMoiPage', giay.sanPhamMoiPage);
 router.get('/productLG', giay.productLG);
 router.post('/giayLG', giay.giayLG);
 router.get('/newProduct', giay.newProduct);

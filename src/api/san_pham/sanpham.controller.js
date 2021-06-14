@@ -160,6 +160,34 @@ module.exports = {
             });
         });
     },
+    sanPhamMoi: (req, res) => {
+        const body = req.body;
+
+        giay.sanPhamMoi(body, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            return res.json({
+                success: 1,
+                data: results,
+            });
+        });
+    },
+    sanPhamMoiPage: (req, res) => {
+        const body = req.body;
+
+        giay.sanPhamMoiPage(body, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            return res.json({
+                success: 1,
+                data: results,
+            });
+        });
+    },
 
     newProductsAll: (req, res) => {
         const body = req.body;
