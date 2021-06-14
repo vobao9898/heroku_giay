@@ -28,7 +28,6 @@ module.exports = {
         });
     },
     productLG: (req, res) => {
-        const body = req.body;
         giay.productLG((err, results) => {
             if (err) {
                 console.log(err);
