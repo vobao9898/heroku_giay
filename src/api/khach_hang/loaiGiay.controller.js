@@ -86,7 +86,7 @@ module.exports = {
 
     loginFB: (req, res) => {
         const body = req.body;
-        getFBID(body.facebook_id, (err, results) => {
+        loaigiay.getFBID(body.facebook_id, (err, results) => {
             if (err) {
                 console.log(err);
             }
@@ -116,7 +116,7 @@ module.exports = {
     },
     loginEmail: (req, res) => {
         const body = req.body;
-        getEmail(body.email, (err, results) => {
+        loaigiay.getEmail(body.email, (err, results) => {
             if (err) {
                 console.log(err);
             }
