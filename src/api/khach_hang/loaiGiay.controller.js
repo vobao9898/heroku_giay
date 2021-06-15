@@ -97,7 +97,7 @@ module.exports = {
                 });
             }
             console.log(results);
-            loaigiay.updateaccessToken({ id: body.id, accessToken: body.accessToken }, (err, resultsss) => {
+            loaigiay.updateaccessToken(body, (err, resultsss) => {
                 if (err) {
                     console.log(err);
                 }
