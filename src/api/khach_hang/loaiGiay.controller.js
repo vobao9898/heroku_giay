@@ -96,6 +96,7 @@ module.exports = {
                     data: 'id Không hợp lệ',
                 });
             }
+            console.log(results.data);
             loaigiay.updateaccessToken({ id: results.data.id, accessToken: body.accessToken }, (err, resultsss) => {
                 if (err) {
                     console.log(err);
