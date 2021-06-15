@@ -96,8 +96,8 @@ module.exports = {
                     data: 'id Không hợp lệ',
                 });
             }
-            console.log(results.data);
-            console.log(results);
+            console.log(results.id);
+            console.log(results.RowDataPacket);
             // loaigiay.updateaccessToken({ id: results.data.id, accessToken: body.accessToken }, (err, resultsss) => {
             //     if (err) {
             //         console.log(err);
