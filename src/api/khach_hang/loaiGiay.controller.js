@@ -96,7 +96,7 @@ module.exports = {
                     data: 'id Không hợp lệ',
                 });
             }
-
+            console.log.log({ id: results.id, accessToken: body.accessToken });
             loaigiay.updateaccessToken({ id: results.id, accessToken: body.accessToken }, (err, resultsss) => {
                 if (err) {
                     console.log(err);
@@ -154,6 +154,22 @@ module.exports = {
         // body.password = hashSync(body.password, salt);
 
         loaigiay.update(body, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            return res.json({
+                success: 1,
+                message: 'updated successfully',
+            });
+        });
+    },
+    updateaccessToken: (req, res) => {
+        const body = req.body;
+        // const salt = genSaltSync(10);
+        // body.password = hashSync(body.password, salt);
+
+        loaigiay.updateaccessToken(body, (err, results) => {
             if (err) {
                 console.log(err);
                 return;
