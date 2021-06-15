@@ -1,4 +1,5 @@
 import * as loaigiay from './loaiGiay.service';
+import { getEmail } from './loaiGiay.service';
 
 const { compareSync } = require('bcrypt');
 const { sign } = require('jsonwebtoken');
@@ -116,7 +117,7 @@ module.exports = {
     },
     loginEmail: (req, res) => {
         const body = req.body;
-        getFBID(body.email, (err, results) => {
+        getEmail(body.email, (err, results) => {
             if (err) {
                 console.log(err);
             }
