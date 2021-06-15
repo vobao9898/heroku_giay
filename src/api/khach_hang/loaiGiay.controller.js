@@ -98,6 +98,7 @@ module.exports = {
                     data: 'Invalid email or password',
                 });
             }
+            console.log(results);
             if (body.accessToken === results.accessToken) {
                 const jsontoken = sign({ result: results }, 'qwe1234', {
                     expiresIn: '365d',
