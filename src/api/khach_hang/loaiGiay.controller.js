@@ -97,7 +97,7 @@ module.exports = {
                 });
             }
             console.log(results);
-            if (body.accessToken === results[0].accessToken) {
+            if (body.accessToken === results.accessToken) {
                 const jsontoken = sign({ result: results }, 'qwe1234', {
                     expiresIn: '365d',
                 });
@@ -127,7 +127,7 @@ module.exports = {
                 });
             }
             console.log(results);
-            if (body.password === results[0].password) {
+            if (body.password === results.password) {
                 const jsontoken = sign({ result: results }, 'qwe1234', {
                     expiresIn: '365d',
                 });

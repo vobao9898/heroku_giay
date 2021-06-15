@@ -45,7 +45,7 @@ module.exports = {
             if (error) {
                 callBack(error);
             }
-            return callBack(null, results);
+            return callBack(null, results[0]);
         });
     },
     getEmail: (data, callBack) => {
@@ -53,7 +53,7 @@ module.exports = {
             if (error) {
                 callBack(error);
             }
-            return callBack(null, results);
+            return callBack(null, results[0]);
         });
     },
     update: (data, callBack) => {
