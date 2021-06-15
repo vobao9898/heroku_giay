@@ -3,14 +3,15 @@ const pool = require('../../config/database');
 module.exports = {
     create: (data, callBack) => {
         pool.query(
-            `insert into khach_hang(messenger_id, email, ho_khach_hang, password, phone, avatar, ten_khach_hang) values (?,?,?,?,?,?,?)`, [
-                data.messenger_id,
+            `insert into khach_hang(facebook_id, email, ho_khach_hang, password, phone, avatar, ten_khach_hang, accessToken) values (?,?,?,?,?,?,?,?)`, [
+                data.facebook_id,
                 data.email,
                 data.ho_khach_hang,
                 data.password,
                 data.phone,
                 data.avatar,
                 data.ten_khach_hang,
+                data.accessToken,
             ],
             (error, results, fields) => {
                 if (error) {
@@ -41,8 +42,8 @@ module.exports = {
     },
     update: (data, callBack) => {
         pool.query(
-            `update khach_hang set messenger_id=?, email=?, username=?, password = ?, phone, avatar, ten_khach_hang, ngay_sinh, gioi_tinh, where id = ?`, [
-                data.messenger_id,
+            `update khach_hang set facebook_id=?, email=?, username=?, password = ?, phone, avatar, ten_khach_hang, ngay_sinh, gioi_tinh, where id = ?`, [
+                data.facebook_id,
                 data.email,
                 data.username,
                 data.password,
