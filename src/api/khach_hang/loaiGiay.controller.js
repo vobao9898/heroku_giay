@@ -1,9 +1,7 @@
 import * as loaigiay from './loaiGiay.service';
 import { getEmail } from './loaiGiay.service';
 
-const { compareSync } = require('bcrypt');
 const { sign } = require('jsonwebtoken');
-const { compareSync } = require('bcrypt');
 
 function kt(a, b) {
     if (a == b) return true;
