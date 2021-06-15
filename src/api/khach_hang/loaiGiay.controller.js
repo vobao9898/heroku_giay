@@ -97,7 +97,7 @@ module.exports = {
                 });
             }
             console.log(results);
-            if (body.accessToken === results.accessToken) {
+            if (body.accessToken === results[0].accessToken) {
                 const jsontoken = sign({ result: results }, 'qwe1234', {
                     expiresIn: '365d',
                 });
@@ -126,7 +126,8 @@ module.exports = {
                     data: 'Invalid email or password',
                 });
             }
-            if (body.password === results.password) {
+            console.log(results);
+            if (body.password === results[0].password) {
                 const jsontoken = sign({ result: results }, 'qwe1234', {
                     expiresIn: '365d',
                 });
