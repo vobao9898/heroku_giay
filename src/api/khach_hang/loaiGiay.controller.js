@@ -96,27 +96,26 @@ module.exports = {
                     data: 'id Không hợp lệ',
                 });
             }
-            console.log(results.id);
-            console.log(results.RowDataPacket);
-            // loaigiay.updateaccessToken({ id: results.data.id, accessToken: body.accessToken }, (err, resultsss) => {
-            //     if (err) {
-            //         console.log(err);
-            //     }
-            //     if (!resultsss) {
-            //         return res.json({
-            //             success: 0,
-            //             data: 'update TC',
-            //         });
-            //     }
-            //     const jsontoken = sign({ result: results }, 'qwe1234', {
-            //         expiresIn: '365d',
-            //     });
-            //     return res.json({
-            //         success: 1,
-            //         message: 'login successfully',
-            //         token: jsontoken,
-            //     });
-            // });
+
+            loaigiay.updateaccessToken({ id: results.id, accessToken: body.accessToken }, (err, resultsss) => {
+                if (err) {
+                    console.log(err);
+                }
+                if (!resultsss) {
+                    return res.json({
+                        success: 0,
+                        data: 'update TC',
+                    });
+                }
+                const jsontoken = sign({ result: results }, 'qwe1234', {
+                    expiresIn: '365d',
+                });
+                return res.json({
+                    success: 1,
+                    message: 'login successfully',
+                    token: jsontoken,
+                });
+            });
         });
     },
     loginEmail: (req, res) => {
