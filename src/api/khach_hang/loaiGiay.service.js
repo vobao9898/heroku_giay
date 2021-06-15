@@ -78,6 +78,17 @@ module.exports = {
             }
         );
     },
+    updateaccessToken: (data, callBack) => {
+        pool.query(
+            `update khach_hang set accessToken=? where id = ?`, [data.accessToken, data.id],
+            (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
+                return callBack(null, results[0]);
+            }
+        );
+    },
     delete: (data, callBack) => {
         pool.query(`DELETE FROM khach_hang WHERE id = ?`, [data.id], (error, results, fields) => {
             if (error) {
