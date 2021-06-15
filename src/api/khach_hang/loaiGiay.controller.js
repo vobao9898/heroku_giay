@@ -86,7 +86,7 @@ module.exports = {
 
     loginFB: (req, res) => {
         const body = req.body;
-        loaigiay.getFBID(body.facebook_id, (err, results) => {
+        loaigiay.getFBID(body, (err, results) => {
             if (err) {
                 console.log(err);
             }
@@ -96,7 +96,6 @@ module.exports = {
                     data: 'Invalid email or password',
                 });
             }
-            console.log(results);
             if (body.accessToken === results.accessToken) {
                 const jsontoken = sign({ result: results }, 'qwe1234', {
                     expiresIn: '365d',
@@ -116,7 +115,7 @@ module.exports = {
     },
     loginEmail: (req, res) => {
         const body = req.body;
-        loaigiay.getEmail(body.email, (err, results) => {
+        loaigiay.getEmail(body, (err, results) => {
             if (err) {
                 console.log(err);
             }
@@ -126,7 +125,6 @@ module.exports = {
                     data: 'Invalid email or password',
                 });
             }
-            console.log(results);
             if (body.password === results.password) {
                 const jsontoken = sign({ result: results }, 'qwe1234', {
                     expiresIn: '365d',
