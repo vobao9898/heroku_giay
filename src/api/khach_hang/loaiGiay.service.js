@@ -40,6 +40,22 @@ module.exports = {
             return callBack(null, results);
         });
     },
+    getFBID: (data, callBack) => {
+        pool.query(`select * from khach_hang where facebook_id = ? `, [data.facebook_id], (error, results, fields) => {
+            if (error) {
+                callBack(error);
+            }
+            return callBack(null, results);
+        });
+    },
+    getEmail: (data, callBack) => {
+        pool.query(`select * from khach_hang where email = ? `, [data.email], (error, results, fields) => {
+            if (error) {
+                callBack(error);
+            }
+            return callBack(null, results);
+        });
+    },
     update: (data, callBack) => {
         pool.query(
             `update khach_hang set facebook_id=?, email=?, username=?, password = ?, phone, avatar, ten_khach_hang, ngay_sinh, gioi_tinh, where id = ?`, [

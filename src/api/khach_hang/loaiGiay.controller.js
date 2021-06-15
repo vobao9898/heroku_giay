@@ -10,10 +10,6 @@ function kt(a, b) {
 module.exports = {
     create: (req, res) => {
         const body = req.body;
-        console.log(body);
-        // const salt = genSaltSync(10);
-        // body.password = hashSync(body.password, salt);
-
         loaigiay.create(body, (err, results) => {
             if (err) {
                 console.log(err);
@@ -51,6 +47,32 @@ module.exports = {
     },
     getAll: (req, res) => {
         loaigiay.getAll((err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            return res.json({
+                success: 1,
+                data: results,
+            });
+        });
+    },
+    getFBID: (req, res) => {
+        const body = req.body;
+        loaigiay.getFBID(body, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            return res.json({
+                success: 1,
+                data: results,
+            });
+        });
+    },
+    getEmail: (req, res) => {
+        const body = req.body;
+        loaigiay.getEmail(body, (err, results) => {
             if (err) {
                 console.log(err);
                 return;
