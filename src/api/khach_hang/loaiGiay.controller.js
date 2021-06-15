@@ -2,6 +2,7 @@ import * as loaigiay from './loaiGiay.service';
 
 const { compareSync } = require('bcrypt');
 const { sign } = require('jsonwebtoken');
+const { compareSync } = require('bcrypt');
 
 function kt(a, b) {
     if (a == b) return true;
@@ -83,6 +84,66 @@ module.exports = {
             });
         });
     },
+
+    loginFB: (req, res) => {
+        const body = req.body;
+        getFBID(body.facebook_id, (err, results) => {
+            if (err) {
+                console.log(err);
+            }
+            if (!results) {
+                return res.json({
+                    success: 0,
+                    data: 'Invalid email or password',
+                });
+            }
+            if (body.accessToken === results.accessToken) {
+                const jsontoken = sign({ result: results }, 'qwe1234', {
+                    expiresIn: '365d',
+                });
+                return res.json({
+                    success: 1,
+                    message: 'login successfully',
+                    token: jsontoken,
+                });
+            } else {
+                return res.json({
+                    success: 0,
+                    data: 'Invalid email or password',
+                });
+            }
+        });
+    },
+    loginEmail: (req, res) => {
+        const body = req.body;
+        getFBID(body.email, (err, results) => {
+            if (err) {
+                console.log(err);
+            }
+            if (!results) {
+                return res.json({
+                    success: 0,
+                    data: 'Invalid email or password',
+                });
+            }
+            if (body.password === results.password) {
+                const jsontoken = sign({ result: results }, 'qwe1234', {
+                    expiresIn: '365d',
+                });
+                return res.json({
+                    success: 1,
+                    message: 'login successfully',
+                    token: jsontoken,
+                });
+            } else {
+                return res.json({
+                    success: 0,
+                    data: 'Invalid email or password',
+                });
+            }
+        });
+    },
+
     update: (req, res) => {
         const body = req.body;
         // const salt = genSaltSync(10);

@@ -5,6 +5,8 @@ router.get('/', controller.getAll);
 router.post('/', controller.create);
 router.post('/getFBID', controller.getFBID);
 router.post('/getEmail', controller.getEmail);
+router.post('/loginFB', controller.loginFB);
+router.post('/loginEmail', controller.loginEmail);
 router.post('/', controller.create);
 // router.get('/:id', controller.getLoaiGiayByid);
 router.patch('/', controller.update);
