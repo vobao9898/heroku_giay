@@ -7,7 +7,7 @@ const {
     deleteUser,
     page,
 } = require('./user.service');
-const { hashSync, genSaltSync, compareSync } = require('bcrypt');
+const { compareSync } = require('bcrypt');
 const { sign } = require('jsonwebtoken');
 
 function kt(a, b) {

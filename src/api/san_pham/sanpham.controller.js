@@ -176,8 +176,34 @@ module.exports = {
     },
     sanPhamMoiPage: (req, res) => {
         const body = req.body;
-
         giay.sanPhamMoiPage(body, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            return res.json({
+                success: 1,
+                data: results,
+            });
+        });
+    },
+
+    xemSanPham: (req, res) => {
+        const body = req.body;
+        giay.xemSanPham(body, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            return res.json({
+                success: 1,
+                data: results,
+            });
+        });
+    },
+    xemSanPhamAll: (req, res) => {
+        const body = req.body;
+        giay.xemSanPhamAll(body, (err, results) => {
             if (err) {
                 console.log(err);
                 return;

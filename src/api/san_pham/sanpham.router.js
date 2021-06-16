@@ -3,7 +3,8 @@ const { checkToken } = require('../../auth/token_validation');
 import * as giay from './sanpham.controller';
 router.get('/', giay.getGiay);
 router.get('/newProducts', giay.newProducts);
-
+router.post('/xemSanPhamAll', giay.xemSanPhamAll);
+router.post('/xemSanPham', giay.xemSanPham);
 router.post('/newProductsAllPage', giay.newProductsAllPage);
 router.post('/newProductsAll', giay.newProductsAll);
 router.post('/sanPhamMoi', giay.sanPhamMoi);
