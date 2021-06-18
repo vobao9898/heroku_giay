@@ -94,7 +94,7 @@ module.exports = {
     },
     newProducts: (callBack) => {
         pool.query(
-            `select g.id as id_giay, g.ten_giay, g.gia_ban, g.id_loai_giay, g.mo_ta, g.gia_ban_khuyen_mai, m.id, m.id_mau_sac, ms.ten_mau_sac, m.hinh_anh, s.id_size, si.ten_size, s.so_luong from giay as g, chi_tiet_mau_sac as m, chi_tiet_mau_sac_size as s, mau_sac as ms, size as si WHERE g.id = m.id_giay  and m.id_mau_sac = ms.id and  m.id = s.id_ct_mau_sac and si.id = s.id_size and g.trang_thai != 0 and g.id IN (SELECT sub.id from (select * from giay ORDER BY date_create DESC LIMIT 9)AS sub)`, [],
+            `select g.id as id_giay, g.ten_giay, g.gia_ban, g.id_loai_giay, g.mo_ta, m.id, m.id_mau_sac, ms.ten_mau_sac, m.hinh_anh, s.id_size, si.ten_size, s.so_luong from giay as g, chi_tiet_mau_sac as m, chi_tiet_mau_sac_size as s, mau_sac as ms, size as si WHERE g.id = m.id_giay  and m.id_mau_sac = ms.id and  m.id = s.id_ct_mau_sac and si.id = s.id_size and g.trang_thai != 0 and g.id IN (SELECT sub.id from (select * from giay ORDER BY date_create DESC LIMIT 9)AS sub)`, [],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
@@ -106,7 +106,7 @@ module.exports = {
 
     newProductsAll: (data, callBack) => {
         pool.query(
-            `select g.id as id_giay, g.ten_giay, g.gia_ban, g.id_loai_giay, g.mo_ta, g.gia_ban_khuyen_mai, m.id, m.id_mau_sac, ms.ten_mau_sac, m.hinh_anh, s.id_size, si.ten_size, s.so_luong from giay as g, chi_tiet_mau_sac as m, chi_tiet_mau_sac_size as s, mau_sac as ms, size as si WHERE g.id = m.id_giay  and m.id_mau_sac = ms.id and  m.id = s.id_ct_mau_sac and si.id = s.id_size and g.trang_thai != 0 and g.id IN (SELECT sub.id from (select * from giay where id_loai_giay = ? ORDER BY ${data.sortBy} ${data.groupBy} LIMIT ? OFFSET ?)AS sub)`, [data.id_loai_giay, data.limit, data.offset],
+            `select g.id as id_giay, g.ten_giay, g.gia_ban, g.id_loai_giay, g.mo_ta, m.id, m.id_mau_sac, ms.ten_mau_sac, m.hinh_anh, s.id_size, si.ten_size, s.so_luong from giay as g, chi_tiet_mau_sac as m, chi_tiet_mau_sac_size as s, mau_sac as ms, size as si WHERE g.id = m.id_giay  and m.id_mau_sac = ms.id and  m.id = s.id_ct_mau_sac and si.id = s.id_size and g.trang_thai != 0 and g.id IN (SELECT sub.id from (select * from giay where id_loai_giay = ? ORDER BY ${data.sortBy} ${data.groupBy} LIMIT ? OFFSET ?)AS sub)`, [data.id_loai_giay, data.limit, data.offset],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
@@ -131,7 +131,7 @@ module.exports = {
 
     sanPhamMoi: (data, callBack) => {
         pool.query(
-            `select g.id as id_giay, g.ten_giay, g.gia_ban, g.id_loai_giay, g.mo_ta, g.gia_ban_khuyen_mai, m.id, m.id_mau_sac, ms.ten_mau_sac, m.hinh_anh, s.id_size, si.ten_size, s.so_luong from giay as g, chi_tiet_mau_sac as m, chi_tiet_mau_sac_size as s, mau_sac as ms, size as si WHERE g.id = m.id_giay  and m.id_mau_sac = ms.id and  m.id = s.id_ct_mau_sac and si.id = s.id_size and g.trang_thai != 0 and g.id IN (SELECT sub.id from (select * from giay ORDER BY ${data.sortBy} ${data.groupBy} LIMIT ? OFFSET ?)AS sub)`, [data.limit, data.offset],
+            `select g.id as id_giay, g.ten_giay, g.gia_ban, g.id_loai_giay, g.mo_ta, m.id, m.id_mau_sac, ms.ten_mau_sac, m.hinh_anh, s.id_size, si.ten_size, s.so_luong from giay as g, chi_tiet_mau_sac as m, chi_tiet_mau_sac_size as s, mau_sac as ms, size as si WHERE g.id = m.id_giay  and m.id_mau_sac = ms.id and  m.id = s.id_ct_mau_sac and si.id = s.id_size and g.trang_thai != 0 and g.id IN (SELECT sub.id from (select * from giay ORDER BY ${data.sortBy} ${data.groupBy} LIMIT ? OFFSET ?)AS sub)`, [data.limit, data.offset],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
@@ -155,7 +155,7 @@ module.exports = {
     },
     xemSanPhamAll: (data, callBack) => {
         pool.query(
-            `select g.id as id_giay, g.ten_giay, g.gia_ban, g.id_loai_giay, g.mo_ta, g.gia_ban_khuyen_mai, m.id, m.id_mau_sac, ms.ten_mau_sac, m.hinh_anh, s.id_size, si.ten_size, s.so_luong from giay as g, chi_tiet_mau_sac as m, chi_tiet_mau_sac_size as s, mau_sac as ms, size as si WHERE g.id = m.id_giay  and m.id_mau_sac = ms.id and  m.id = s.id_ct_mau_sac and si.id = s.id_size and g.trang_thai != 0 and g.id IN (SELECT sub.id from (select g.*, l.ten_loai_giay from giay as g, loai_giay as l where g.id_loai_giay = l.id and g.id = ?)AS sub)`, [data.id],
+            `select g.id as id_giay, g.ten_giay, g.gia_ban, g.id_loai_giay, g.mo_ta, m.id, m.id_mau_sac, ms.ten_mau_sac, m.hinh_anh, s.id_size, si.ten_size, s.so_luong from giay as g, chi_tiet_mau_sac as m, chi_tiet_mau_sac_size as s, mau_sac as ms, size as si WHERE g.id = m.id_giay  and m.id_mau_sac = ms.id and  m.id = s.id_ct_mau_sac and si.id = s.id_size and g.trang_thai != 0 and g.id IN (SELECT sub.id from (select g.*, l.ten_loai_giay from giay as g, loai_giay as l where g.id_loai_giay = l.id and g.id = ?)AS sub)`, [data.id],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
@@ -180,7 +180,7 @@ module.exports = {
 
     productLG: (callBack) => {
         pool.query(
-            `select g.id as id_giay, g.ten_giay, g.gia_ban, g.id_loai_giay, g.mo_ta, g.gia_ban_khuyen_mai, m.id, m.id_mau_sac, ms.ten_mau_sac, m.hinh_anh, s.id_size, si.ten_size, s.so_luong from giay as g, chi_tiet_mau_sac as m, chi_tiet_mau_sac_size as s, mau_sac as ms, size as si WHERE g.id = m.id_giay  and m.id_mau_sac = ms.id and  m.id = s.id_ct_mau_sac and si.id = s.id_size and g.trang_thai != 0 and g.id IN (SELECT sub.id from (select * from giay )AS sub)`, [],
+            `select g.id as id_giay, g.ten_giay, g.gia_ban, g.id_loai_giay, g.mo_ta, m.id, m.id_mau_sac, ms.ten_mau_sac, m.hinh_anh, s.id_size, si.ten_size, s.so_luong from giay as g, chi_tiet_mau_sac as m, chi_tiet_mau_sac_size as s, mau_sac as ms, size as si WHERE g.id = m.id_giay  and m.id_mau_sac = ms.id and  m.id = s.id_ct_mau_sac and si.id = s.id_size and g.trang_thai != 0 and g.id IN (SELECT sub.id from (select * from giay )AS sub)`, [],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);

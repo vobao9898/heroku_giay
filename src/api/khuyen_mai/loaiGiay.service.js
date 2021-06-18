@@ -3,13 +3,14 @@ const pool = require('../../config/database');
 module.exports = {
     create: (data, callBack) => {
         pool.query(
-            `insert into khuyen_mai(ngay_bat_dau, ngay_ket_thuc, ten_khuyen_mai, mo_ta, phan_tram, hinh_anh, date_create) values (?,?,?,?,?,?,?)`, [
+            `insert into khuyen_mai(ngay_bat_dau, ngay_ket_thuc, ten_khuyen_mai, mo_ta, phan_tram, hinh_anh, trang_thai, date_create) values (?,?,?,?,?,?,?,?)`, [
                 data.ngay_bat_dau,
                 data.ngay_ket_thuc,
                 data.ten_khuyen_mai,
                 data.mo_ta,
                 data.phan_tram,
                 data.hinh_anh,
+                data.trang_thai,
                 data.date_create,
             ],
             (error, results, fields) => {
@@ -50,13 +51,14 @@ module.exports = {
     updateKhuyenMai: (data, callBack) => {
         console.log(data);
         pool.query(
-            `update khuyen_mai set ngay_bat_dau=?, ngay_ket_thuc=?, ten_khuyen_mai = ?, mo_ta=?, phan_tram=?, hinh_anh=?, date_update=? where id = ?`, [
+            `update khuyen_mai set ngay_bat_dau=?, ngay_ket_thuc=?, ten_khuyen_mai = ?, mo_ta=?, phan_tram=?, hinh_anh=?,trang_thai=?, date_update=? where id = ?`, [
                 data.ngay_bat_dau,
                 data.ngay_ket_thuc,
                 data.ten_khuyen_mai,
                 data.mo_ta,
                 data.phan_tram,
                 data.hinh_anh,
+                data.trang_thai,
                 data.date_update,
                 data.id,
             ],
