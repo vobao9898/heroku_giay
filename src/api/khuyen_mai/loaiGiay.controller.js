@@ -26,7 +26,7 @@ module.exports = {
     },
     getKhuyenMaiNow: (req, res) => {
         const body = req.body;
-        giay.getKhuyenMaiNow(body, (err, results) => {
+        loaigiay.getKhuyenMaiNow(body, (err, results) => {
             if (err) {
                 console.log(err);
                 return;
@@ -39,7 +39,7 @@ module.exports = {
     },
     getSanPhamKMNow: (req, res) => {
         const body = req.body;
-        giay.getSanPhamKMNow(body, (err, results) => {
+        loaigiay.getSanPhamKMNow(body, (err, results) => {
             if (err) {
                 console.log(err);
                 return;
