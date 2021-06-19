@@ -24,7 +24,7 @@ module.exports = {
     },
     getKhuyenMaiNow: (data, callBack) => {
         pool.query(
-            `select * from khuyen_mai as k, chi_tiet_khuyen_mai as c WHERE k.id = c.id_khuyen_mai and ${data.date_now} BETWEEN k.ngay_bat_dau AND k.ngay_ket_thuc`, [data.date_now],
+            `select * from khuyen_mai as k, chi_tiet_khuyen_mai as c WHERE k.id = c.id_khuyen_mai and '${data.date_now}' BETWEEN k.ngay_bat_dau AND k.ngay_ket_thuc`, [data.date_now],
             (error, results, fields) => {
                 if (error) {
                     console.log(error);
@@ -37,7 +37,7 @@ module.exports = {
     },
     getSanPhamKMNow: (data, callBack) => {
         pool.query(
-            `select g.* from khuyen_mai as k, chi_tiet_khuyen_mai as c, giay as g WHERE k.id = c.id_khuyen_mai and c.id_giay = g.id and ${data.date_now} BETWEEN k.ngay_bat_dau AND k.ngay_ket_thuc`, [],
+            `select g.* from khuyen_mai as k, chi_tiet_khuyen_mai as c, giay as g WHERE k.id = c.id_khuyen_mai and c.id_giay = g.id and '${data.date_now}' BETWEEN k.ngay_bat_dau AND k.ngay_ket_thuc`, [],
             (error, results, fields) => {
                 if (error) {
                     console.log(error);
