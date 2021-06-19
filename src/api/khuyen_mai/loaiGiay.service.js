@@ -23,6 +23,33 @@ module.exports = {
             }
         );
     },
+    getKhuyenMaiNow: (data, callBack) => {
+        pool.query(
+            `select * from khuyen_mai as k, chi_tiet_khuyen_mai as c WHERE k.id = c.id_khuyen_mai and ? BETWEEN k.ngay_bat_dau AND k.ngay_ket_thuc`, [data.date_now],
+            (error, results, fields) => {
+                if (error) {
+                    console.log(error);
+                    callBack(error);
+                }
+
+                return callBack(null, results);
+            }
+        );
+    },
+    getSanPhamKMNow: (data, callBack) => {
+        pool.query(
+            `select g.* from khuyen_mai as k, chi_tiet_khuyen_mai as c, giay as g WHERE k.id = c.id_khuyen_mai and c.id_giay = g.id and ? BETWEEN k.ngay_bat_dau AND k.ngay_ket_thuc`, [data.date_now],
+            (error, results, fields) => {
+                if (error) {
+                    console.log(error);
+                    callBack(error);
+                }
+
+                return callBack(null, results);
+            }
+        );
+    },
+
     getTen: (ten_loai_giay, callBack) => {
         pool.query(`select * from khuyen_mai where ten_khuyen_mai = ?`, [ten_khuyen_mai], (error, results, fields) => {
             if (error) {

@@ -24,7 +24,32 @@ module.exports = {
             });
         });
     },
-
+    getKhuyenMaiNow: (req, res) => {
+        const body = req.body;
+        giay.getKhuyenMaiNow(body, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            return res.json({
+                success: 1,
+                data: results,
+            });
+        });
+    },
+    getSanPhamKMNow: (req, res) => {
+        const body = req.body;
+        giay.getSanPhamKMNow(body, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            return res.json({
+                success: 1,
+                data: results,
+            });
+        });
+    },
     getById: (req, res) => {
         const id = req.params.id;
         loaigiay.getById(id, (err, results) => {
