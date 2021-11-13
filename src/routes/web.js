@@ -6,7 +6,7 @@ let router = express.Router();
 
 let initWebRouter = (app) => {
     router.get('/api/nhan-vien', sql.danhsachLogin);
-
+    router.get('/', sql.danhsachLogin);
     router.get('/logout', (req, res) => {
         req.session.destroy();
         req.logout();
