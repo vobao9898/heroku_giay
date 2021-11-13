@@ -45,12 +45,10 @@
         "session": "^0.1.0",
         "sharp": "^0.28.1",
         "util": "^0.12.3",
-        "uuidv4": "^6.2.7"
-    },
-    "devDependencies": {
-
+        "uuidv4": "^6.2.7",
+        "@babel/core": "^7.16.0",
         "@babel/preset-env": "^7.16.0",
-        "babel-core": "^6.26.3",
-        "babel-loader": "^8.2.3"
+        "babel-core": "^6.26.3"
     }
+
 }
