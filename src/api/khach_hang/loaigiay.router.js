@@ -4,6 +4,7 @@ import * as controller from './loaiGiay.controller';
 router.get('/', controller.getAll);
 router.post('/', controller.create);
 router.post('/getFBID', controller.getFBID);
+router.post('/createAcount', controller.createAcount);
 router.post('/getEmail', controller.getEmail);
 router.post('/loginFB', controller.loginFB);
 router.post('/updateaccessToken', controller.updateaccessToken);
