@@ -91,15 +91,19 @@ module.exports = {
 		const body = req.body;
 		loaigiay.getEmail(body, (err, results) => {
 			if (err) {
+				console.log(err);
+				return;
+			}
+			if (results) {
 				return res.json({
-					success: 2,
+					success: 1,
 					data: results,
 				});
+			} else {
+				return res.json({
+					success: 2,
+				});
 			}
-			return res.json({
-				success: 1,
-				data: results,
-			});
 		});
 	},
 
