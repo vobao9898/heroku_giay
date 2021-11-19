@@ -3,7 +3,7 @@ const pool = require('../../config/database');
 module.exports = {
     create: (data, callBack) => {
         pool.query(
-            `insert into chi_tiet_don_hang(id_giay, id_dat_hang, so_luong, tong_tien) values (?,?,?,?)`, [data.id_giay, data.id_dat_hang, data.so_luong, data.tong_tien],
+            `insert into chi_tiet_don_hang(id_giay, id_dat_hang, so_luong, id_chi_tiet_mau_sac, tong_tien) values (?,?,?,?,?)`, [data.id_giay, data.id_dat_hang, data.so_luong, data.id_chi_tiet_mau_sac, data.tong_tien],
             (error, results, fields) => {
                 if (error) {
                     console.log(error);
