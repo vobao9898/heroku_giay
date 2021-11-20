@@ -9,7 +9,6 @@ module.exports = {
                     console.log(error);
                     callBack(error);
                 }
-
                 return callBack(null, results);
             }
         );
@@ -42,12 +41,12 @@ module.exports = {
             }
         );
     },
-    delete: (data, callBack) => {
-        pool.query(`DELETE FROM chi_tiet_don_hang WHERE id = ?`, [data.id], (error, results, fields) => {
-            if (error) {
-                return callBack(error);
-            }
-            return callBack(null, results[0]);
-        });
-    },
+    // delete: (data, callBack) => {
+    //     pool.query(`DELETE FROM chi_tiet_don_hang WHERE id = ?`, [data.id], (error, results, fields) => {
+    //         if (error) {
+    //             return callBack(error);
+    //         }
+    //         return callBack(null, results[0]);
+    //     });
+    // },
 };
