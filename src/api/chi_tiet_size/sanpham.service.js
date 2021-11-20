@@ -43,7 +43,7 @@ module.exports = {
     },
     getSize: (data, callBack) => {
         pool.query(
-            `SELECT * from chi_tiet_mau_sac_size as cmss WHERE cmss.id_size= ${data.id_size} and cmss.id_ct_mau_sac IN (SELECT cms.id from chi_tiet_mau_sac as cms WHERE cms.id_giay = ${data.id_giay} and cms.id_mau_sac = ${data.id_mau_sac})`, [],
+            `SELECT * from chi_tiet_mau_sac_size as cmss WHERE cmss.id_size= ${data.id_size} and cmss.id_ct_mau_sac IN (SELECT cms.id from chi_tiet_mau_sac as cms WHERE cms.id_giay = '${data.id_giay}' and cms.id_mau_sac = ${data.id_mau_sac})`, [],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
