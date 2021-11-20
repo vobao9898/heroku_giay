@@ -92,6 +92,19 @@ module.exports = {
             });
         });
     },
+    getSize: (req, res) => {
+        const body = req.body;
+        ctmauSac.getSize(body, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            return res.json({
+                success: 1,
+                data: results,
+            });
+        });
+    },
     update: (req, res) => {
         const body = req.body;
 
