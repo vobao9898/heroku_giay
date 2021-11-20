@@ -94,11 +94,13 @@ module.exports = {
     },
     getSize: (req, res) => {
         const body = req.body;
+
         ctmauSac.getSize(body, (err, results) => {
             if (err) {
                 console.log(err);
                 return;
             }
+            console.log(results);
             return res.json({
                 success: 1,
                 data: results,
@@ -107,7 +109,6 @@ module.exports = {
     },
     update: (req, res) => {
         const body = req.body;
-
         console.log(body);
         ctmauSac.update(body, (err, results) => {
             if (err) {
