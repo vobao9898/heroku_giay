@@ -7,7 +7,7 @@ router.post('/getSize', ctmauSac.getSize);
 router.post('/', ctmauSac.create);
 // router.get('/:id', ctmauSac.getById);
 // router.post('/ten_giay', ctmauSac.getBy);
-router.patch('/', ctmauSac.update);
+router.post('/update', ctmauSac.update);
 router.post('/delete', ctmauSac.delete);
 
 module.exports = router;
