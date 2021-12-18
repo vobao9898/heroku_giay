@@ -1,17 +1,6 @@
 import * as loaigiay from "./loaiGiay.service";
-var request = require("request");
 const { compareSync } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
-
-import axios from "axios";
-
-const authAxios = axios.create({
-    baseURL: "http://localhost:5001",
-    headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-    },
-});
 
 module.exports = {
     create: (req, res) => {
@@ -105,9 +94,5 @@ module.exports = {
                 message: "Record Not Found",
             });
         });
-    },
-    postNotify: (req, res) => {
-        const body = req.body;
-        authAxios.post(``, body);
     },
 };
