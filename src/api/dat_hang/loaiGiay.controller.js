@@ -1,7 +1,7 @@
-import * as loaigiay from './loaiGiay.service';
-
-const { compareSync } = require('bcrypt');
-const { sign } = require('jsonwebtoken');
+import * as loaigiay from "./loaiGiay.service";
+var request = require("request");
+const { compareSync } = require("bcrypt");
+const { sign } = require("jsonwebtoken");
 
 function kt(a, b) {
     if (a == b) return true;
@@ -19,7 +19,7 @@ module.exports = {
                 console.log(err);
                 return res.status(500).json({
                     success: 0,
-                    message: 'Database connection errror',
+                    message: "Database connection errror",
                 });
             }
             return res.status(200).json({
@@ -39,7 +39,7 @@ module.exports = {
             if (!results) {
                 return res.json({
                     success: 0,
-                    message: 'Record not Found',
+                    message: "Record not Found",
                 });
             }
 
@@ -73,7 +73,7 @@ module.exports = {
             }
             return res.json({
                 success: 1,
-                message: 'updated successfully',
+                message: "updated successfully",
             });
         });
     },
@@ -81,23 +81,35 @@ module.exports = {
         const data = req.body;
         loaigiay.delete(data, (err, results) => {
             if (err) {
-                if (err.code === 'ER_ROW_IS_REFERENCED_2') {
+                if (err.code === "ER_ROW_IS_REFERENCED_2") {
                     return res.json({
                         success: 500,
-                        message: 'đơn hàng hiện không thể xóa phẩm không thể xóa',
+                        message: "đơn hàng hiện không thể xóa phẩm không thể xóa",
                     });
                 }
             }
-            if (results == 'undefined') {
+            if (results == "undefined") {
                 return res.json({
                     success: 1,
-                    message: 'user deleted successfully',
+                    message: "user deleted successfully",
                 });
             }
             return res.json({
                 success: 0,
-                message: 'Record Not Found',
+                message: "Record Not Found",
             });
         });
+    },
+    postNotify: (req, res) => {
+        const body = req.body;
+        request.post({
+                url: "http://localhost:5001/",
+                body: body,
+                json: true,
+            },
+            function(error, response, body) {
+                console.log(body);
+            }
+        );
     },
 };
