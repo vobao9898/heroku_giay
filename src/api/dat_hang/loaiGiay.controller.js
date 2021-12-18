@@ -3,10 +3,16 @@ var request = require("request");
 const { compareSync } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 
-function kt(a, b) {
-    if (a == b) return true;
-    return false;
-}
+import axios from "axios";
+
+const authAxios = axios.create({
+    baseURL: "http://localhost:5001",
+    headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+    },
+});
+
 module.exports = {
     create: (req, res) => {
         const body = req.body;
@@ -102,14 +108,6 @@ module.exports = {
     },
     postNotify: (req, res) => {
         const body = req.body;
-        request.post({
-                url: "http://localhost:5001/",
-                body: body,
-                json: true,
-            },
-            function(error, response, body) {
-                console.log(body);
-            }
-        );
+        authAxios.post(``, body);
     },
 };
