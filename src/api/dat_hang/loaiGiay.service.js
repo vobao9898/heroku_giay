@@ -1,4 +1,4 @@
-const pool = require('../../config/database');
+const pool = require("../../config/database");
 
 module.exports = {
     create: (data, callBack) => {
@@ -25,12 +25,15 @@ module.exports = {
     },
 
     getById: (id, callBack) => {
-        pool.query(`select * from dat_hang where id = ?`, [id], (error, results, fields) => {
-            if (error) {
-                callBack(error);
+        pool.query(
+            `select * from dat_hang where id = ?`, [id],
+            (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
+                return callBack(null, results[0]);
             }
-            return callBack(null, results[0]);
-        });
+        );
     },
     getAll: (callBack) => {
         pool.query(`select * from dat_hang`, [], (error, results, fields) => {
@@ -61,11 +64,73 @@ module.exports = {
         );
     },
     delete: (data, callBack) => {
-        pool.query(`DELETE FROM dat_hang WHERE id = ?`, [data.id], (error, results, fields) => {
-            if (error) {
-                return callBack(error);
+        pool.query(
+            `DELETE FROM dat_hang WHERE id = ?`, [data.id],
+            (error, results, fields) => {
+                if (error) {
+                    return callBack(error);
+                }
+                return callBack(null, results[0]);
             }
-            return callBack(null, results[0]);
-        });
+        );
+    },
+
+    page: (data, callBack) => {
+        if (data.status) {
+            pool.query(
+                `select * from dat_hang where is_active = 1 and status =? limit 6 offset ?`, [data.status, data.offset],
+                (error, results, fields) => {
+                    if (error) {
+                        callBack(error);
+                    }
+                    return callBack(null, results);
+                }
+            );
+        } else {
+            pool.query(
+                `select * from dat_hang where is_active = 1 limit 6 offset ?`, [data.offset],
+                (error, results, fields) => {
+                    if (error) {
+                        callBack(error);
+                    }
+                    return callBack(null, results);
+                }
+            );
+        }
+    },
+    pageSearch: (data, callBack) => {
+        if (data.status) {
+            pool.query(
+                `select * from dat_hang where is_active = 1 and status =?`, [data.status],
+                (error, results, fields) => {
+                    if (error) {
+                        callBack(error);
+                    }
+                    return callBack(null, results);
+                }
+            );
+        } else {
+            pool.query(
+                `select * from dat_hang where is_active = 1`, [],
+                (error, results, fields) => {
+                    if (error) {
+                        callBack(error);
+                    }
+                    return callBack(null, results);
+                }
+            );
+        }
+    },
+
+    getDonHangByID: (data, callBack) => {
+        pool.query(
+            `SELECT d.*, k.ten from dat_hang as d, khachhang as k WHERE d.is_active = 1 and k.id = d.id_khachhang and d.id = ?`, [data.id],
+            (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
     },
 };

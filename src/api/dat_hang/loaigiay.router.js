@@ -6,5 +6,7 @@ router.post("/", controller.create);
 // router.get('/:id', controller.getLoaiGiayByid);
 router.patch("/", controller.update);
 router.post("/delete", controller.delete);
+router.post("/page", controller.page);
+router.post("/pageSearch", controller.pageSearch);
 
 module.exports = router;

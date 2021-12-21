@@ -6,9 +6,6 @@ module.exports = {
     create: (req, res) => {
         const body = req.body;
         console.log(body);
-        // const salt = genSaltSync(10);
-        // body.password = hashSync(body.password, salt);
-
         loaigiay.create(body, (err, results) => {
             if (err) {
                 console.log(err);
@@ -58,9 +55,6 @@ module.exports = {
     },
     update: (req, res) => {
         const body = req.body;
-        // const salt = genSaltSync(10);
-        // body.password = hashSync(body.password, salt);
-
         loaigiay.update(body, (err, results) => {
             if (err) {
                 console.log(err);
@@ -72,6 +66,35 @@ module.exports = {
             });
         });
     },
+
+    page: (req, res) => {
+        const body = req.body;
+        loaigiay.page(body, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            return res.json({
+                success: 1,
+                data: results,
+            });
+        });
+    },
+
+    pageSearch: (req, res) => {
+        const body = req.body;
+        loaigiay.pageSearch(body, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            return res.json({
+                success: 1,
+                data: results,
+            });
+        });
+    },
+
     delete: (req, res) => {
         const data = req.body;
         loaigiay.delete(data, (err, results) => {
