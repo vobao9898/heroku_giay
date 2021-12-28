@@ -1,9 +1,17 @@
-const pool = require('../../config/database');
+const pool = require("../../config/database");
 
 module.exports = {
     create: (data, callBack) => {
         pool.query(
-            `insert into giay(id, ten_giay, mo_ta, id_loai_giay, date_create, gia_ban, trang_thai) values (?,?,?,?,?,?,?)`, [data.id_g, data.ten_giay, data.mo_ta, data.id_loai_giay, data.date_create, data.gia_ban, data.trang_thai],
+            `insert into giay(id, ten_giay, mo_ta, id_loai_giay, date_create, gia_ban, trang_thai) values (?,?,?,?,?,?,?)`, [
+                data.id_g,
+                data.ten_giay,
+                data.mo_ta,
+                data.id_loai_giay,
+                data.date_create,
+                data.gia_ban,
+                data.trang_thai,
+            ],
             (error, results, fields) => {
                 if (error) {
                     console.log(error);
@@ -14,21 +22,27 @@ module.exports = {
         );
     },
     getUserByGiayTen_giay: (ten_giay, callBack) => {
-        pool.query(`select * from giay where ten_giay = ?`, [ten_giay], (error, results, fields) => {
-            if (error) {
-                callBack(error);
-            }
+        pool.query(
+            `select * from giay where ten_giay = ?`, [ten_giay],
+            (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
 
-            return callBack(null, results[0]);
-        });
+                return callBack(null, results[0]);
+            }
+        );
     },
     getUserByGiayId: (id, callBack) => {
-        pool.query(`select * from giay where id = ?`, [id], (error, results, fields) => {
-            if (error) {
-                callBack(error);
+        pool.query(
+            `select * from giay where id = ?`, [id],
+            (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
+                return callBack(null, results[0]);
             }
-            return callBack(null, results[0]);
-        });
+        );
     },
     page: (data, callBack) => {
         if (data.id_loai_giay !== 0) {
@@ -43,18 +57,21 @@ module.exports = {
                 }
             );
         } else {
-            pool.query(`select * from giay limit ? offset ?`, [data.limit, data.offset], (error, results, fields) => {
-                if (error) {
-                    callBack(error);
-                }
+            pool.query(
+                `select * from giay limit ? offset ?`, [data.limit, data.offset],
+                (error, results, fields) => {
+                    if (error) {
+                        callBack(error);
+                    }
 
-                return callBack(null, results);
-            });
+                    return callBack(null, results);
+                }
+            );
         }
     },
     pageSearch: (data, callBack) => {
         console.log(data);
-        if (data.ten_giay !== '') {
+        if (data.ten_giay !== "") {
             pool.query(
                 `select * from giay WHERE ten_giay like '%${data.ten_giay}%' limit ? offset ?`, [data.limit, data.offset],
                 (error, results, fields) => {
@@ -66,14 +83,43 @@ module.exports = {
                 }
             );
         } else {
-            pool.query(`select * from giay limit ? offset ?`, [data.limit, data.offset], (error, results, fields) => {
+            pool.query(
+                `select * from giay limit ? offset ?`, [data.limit, data.offset],
+                (error, results, fields) => {
+                    if (error) {
+                        callBack(error);
+                    }
+
+                    return callBack(null, results);
+                }
+            );
+        }
+    },
+
+    pageSearchMSAll: (data, callBack) => {
+        pool.query(
+            `select g.id as id_giay, g.ten_giay, g.gia_ban, g.id_loai_giay, g.mo_ta, m.id, m.id_mau_sac, ms.ten_mau_sac, m.hinh_anh, s.id_size, si.ten_size, s.so_luong from giay as g, chi_tiet_mau_sac as m, chi_tiet_mau_sac_size as s, mau_sac as ms, size as si WHERE g.id = m.id_giay  and m.id_mau_sac = ms.id and  m.id = s.id_ct_mau_sac and si.id = s.id_size and g.trang_thai != 0 and g.id IN (SELECT sub.id from (select * from giay where ten_giay like '%${data.ten_giay}%'  LIMIT ? OFFSET ?)AS sub)`, [data.limit, data.offset],
+            (error, results, fields) => {
                 if (error) {
                     callBack(error);
                 }
 
                 return callBack(null, results);
-            });
-        }
+            }
+        );
+    },
+
+    pageSearchAll: (data, callBack) => {
+        pool.query(
+            `select * from giay WHERE ten_giay like '%${data.ten_giay}%'`, [],
+            (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
+
+                return callBack(null, results);
+            }
+        );
     },
 
     getGiay: (callBack) => {
@@ -85,12 +131,15 @@ module.exports = {
         });
     },
     newProduct: (callBack) => {
-        pool.query(`select * from giay ORDER BY date_create DESC`, [], (error, results, fields) => {
-            if (error) {
-                callBack(error);
+        pool.query(
+            `select * from giay ORDER BY date_create DESC`, [],
+            (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
+                return callBack(null, results);
             }
-            return callBack(null, results);
-        });
+        );
     },
     newProducts: (callBack) => {
         pool.query(
@@ -191,17 +240,28 @@ module.exports = {
     },
 
     giayLG: (data, callBack) => {
-        pool.query(`SELECT * from giay WHERE id_loai_giay = ?`, [data.id_loai_giay], (error, results, fields) => {
-            if (error) {
-                callBack(error);
+        pool.query(
+            `SELECT * from giay WHERE id_loai_giay = ?`, [data.id_loai_giay],
+            (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
+                return callBack(null, results);
             }
-            return callBack(null, results);
-        });
+        );
     },
 
     updateGiay: (data, callBack) => {
         pool.query(
-            `update giay set ten_giay=?, mo_ta=?,id_loai_giay=?, date_update=?, gia_ban=?, trang_thai=?  where id = ?`, [data.ten_giay, data.mo_ta, data.id_loai_giay, data.date_update, data.gia_ban, data.trang_thai, data.id_g],
+            `update giay set ten_giay=?, mo_ta=?,id_loai_giay=?, date_update=?, gia_ban=?, trang_thai=?  where id = ?`, [
+                data.ten_giay,
+                data.mo_ta,
+                data.id_loai_giay,
+                data.date_update,
+                data.gia_ban,
+                data.trang_thai,
+                data.id_g,
+            ],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
@@ -211,11 +271,14 @@ module.exports = {
         );
     },
     deleteGiay: (data, callBack) => {
-        pool.query(`DELETE FROM giay WHERE id = ?`, [data.id], (error, results, fields) => {
-            if (error) {
-                return callBack(error);
+        pool.query(
+            `DELETE FROM giay WHERE id = ?`, [data.id],
+            (error, results, fields) => {
+                if (error) {
+                    return callBack(error);
+                }
+                return callBack(null, results[0]);
             }
-            return callBack(null, results[0]);
-        });
+        );
     },
 };

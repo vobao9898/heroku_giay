@@ -95,6 +95,118 @@ module.exports = {
         });
     },
 
+    getCTDonHangByID: (req, res) => {
+        const body = req.body;
+        loaigiay.getCTDonHangByID(body, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            return res.json({
+                success: 1,
+                data: results,
+            });
+        });
+    },
+
+    getGiayByID: (req, res) => {
+        const body = req.body;
+        loaigiay.getGiayByID(body, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            return res.json({
+                success: 1,
+                data: results,
+            });
+        });
+    },
+
+    getDonHangByID: (req, res) => {
+        const body = req.body;
+        loaigiay.getDonHangByID(body, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            return res.json({
+                success: 1,
+                data: results,
+            });
+        });
+    },
+
+    getDonHangByEmail: (req, res) => {
+        const body = req.body;
+        loaigiay.getDonHangByEmail(body, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            return res.json({
+                success: 1,
+                data: results,
+            });
+        });
+    },
+
+    getDonHangBySDT: (req, res) => {
+        const body = req.body;
+        loaigiay.getDonHangBySDT(body, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            return res.json({
+                success: 1,
+                data: results,
+            });
+        });
+    },
+
+    getDonHangByEmailAll: (req, res) => {
+        const body = req.body;
+        loaigiay.getDonHangByEmailAll(body, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            return res.json({
+                success: 1,
+                data: results,
+            });
+        });
+    },
+
+    getDonHangBySDTAll: (req, res) => {
+        const body = req.body;
+        loaigiay.getDonHangBySDTAll(body, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            return res.json({
+                success: 1,
+                data: results,
+            });
+        });
+    },
+
+    updateStatus: (req, res) => {
+        const body = req.body;
+        loaigiay.updateStatus(body, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            return res.json({
+                success: 1,
+                data: results,
+            });
+        });
+    },
+
     delete: (req, res) => {
         const data = req.body;
         loaigiay.delete(data, (err, results) => {
